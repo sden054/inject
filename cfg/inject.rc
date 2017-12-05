@@ -1,0 +1,180 @@
+<!-- Configuration file for the BGP Route Injector -->
+<config>
+	<!-- Logfile -->
+	<!-- Default: /var/log/inject.log -->
+	<logfile>/var/log/inject.log</logfile>
+
+	<!-- File for command line history -->
+	<!-- Default: /tmp/inject_hist.log -->
+	<historyfile>/tmp/inject_hist.log</historyfile>
+
+	<!-- Maximum entries in command line history file -->
+	<!-- Default: 1000 -->
+	<history_max>1000</history_max>
+
+	<!-- Injector prompt -->
+	<!-- Default: Inject> -->
+	<prompt>Inject> </prompt>
+
+	<!-- Debugging options -->
+	<debug>
+		<!-- Debug flaps -->
+		<!-- Default: 1 -->
+		<flap>1</flap>
+
+		<!-- Debug route withdraws -->
+		<!-- Default: 1 -->
+		<withdraw>1</withdraw>
+
+		<!-- Debug BGP keepalive packets -->
+		<!-- Default: 0 -->
+		<keepalives>0</keepalives>
+
+		<!-- Debug BGP open packets -->
+		<!-- Default: 1 -->
+		<open>1</open>
+
+		<!-- Debug BGP reset packets -->
+		<!-- Default: 1 -->
+		<reset>1</reset>
+
+		<!-- Debug BGP refresh packets -->
+		<!-- Default: 0 -->
+		<refresh>0</refresh>
+
+		<!-- Debug BGP notification packets -->
+		<!-- Default: 1 -->
+		<notify>1</notify>
+
+		<!-- Debug BGP update packets -->
+		<!-- Default: 0 -->
+		<update>0</update>
+
+		<!-- Debug BGP error packets -->
+		<!-- Default: 1 -->
+		<error>1</error>
+	</debug>
+
+	<!-- Probability that a given attribute gets chosen -->
+	<!-- by the generate routes command, e.g. if the prop -->
+	<!-- value of MED is 8 than every eighth (at an average) -->
+	<!-- route gets a random MED value set. -->
+	<!-- The only attributes that are supported are local_pref, -->
+	<!-- med, atomic, aggregator and communities. -->
+	<prop>
+		<!-- Localpref -->
+		<!-- Default: 2 -->
+		<local_pref>2</local_pref>
+
+		<!-- MED -->
+		<!-- Default: 8 -->
+		<med>8</med>
+
+		<!-- Atomic -->
+		<!-- Default: 8 -->
+		<atomic>8</atomic>
+
+		<!-- Aggregator -->
+		<!-- Default: 10 -->
+		<aggregator>10</aggregator>
+
+		<!-- Communities -->
+		<!-- Default: 4 -->
+		<communities>8</communities>
+	</prop>
+
+	<options>
+		<!-- Enforce the first AS for generated routes -->
+		<enforce_first_as>1</enforce_first_as>
+	</options>
+	
+	<!-- Local peer configuration -->
+	<!-- The local peer must be configured -->
+	<local name="Local">
+		<!-- Local address -->
+		<address>10.0.0.2</address>
+
+		<!-- Local ASN -->
+		<as>65123</as>
+	</local>
+
+	<!-- Remote peer configuration -->
+	<!-- At least one peer must be configured -->
+	<peer name="Peer1">
+		<!-- Peer description -->
+		<description>Connection to Peer1</description>
+
+		<!-- Peer address -->
+		<address>10.0.0.1</address>
+
+		<!-- Peer port -->
+		<!-- Default: 179 -->
+		<port>179</port>
+
+		<!-- Peer ASN -->
+		<as>35292</as>
+
+		<!-- Holdtime in seconds -->
+		<!-- Default: 90 -->
+		<holdtime>90</holdtime>
+
+		<!-- Connect retry time in seconds -->
+		<!-- Default: 120 -->
+		<connectretrytime>120</connectretrytime>
+
+		<!-- Keepalive time in seconds -->
+		<!-- Default: 30 -->
+		<keepalivetime>30</keepalivetime>
+
+		<!-- Active peer on startup -->
+		<!-- Default: 1 -->
+		<activate>1</activate>
+
+		<!-- Peer will listen for and accept sessions -->
+		<!-- Default: 1 -->
+		<listen>1</listen>
+
+		<!-- Peer will attempt to initiate a connection -->
+		<!-- Default: 0 -->
+		<passive>0</passive>
+	</peer>
+	<peer name="Peer2">
+		<!-- Peer description -->
+		<description>Connection to Peer2</description>
+
+		<!-- Peer address -->
+		<address>87.239.138.65</address>
+
+		<!-- Peer port -->
+		<!-- Default: 179 -->
+		<port>179</port>
+
+		<!-- Peer ASN -->
+		<as>35292</as>
+
+		<!-- Holdtime in seconds -->
+		<!-- Default: 90 -->
+		<holdtime>90</holdtime>
+
+		<!-- Connect retry time in seconds -->
+		<!-- Default: 120 -->
+		<connectretrytime>120</connectretrytime>
+
+		<!-- Keepalive time in seconds -->
+		<!-- Default: 30 -->
+		<keepalivetime>30</keepalivetime>
+
+		<!-- Active peer on startup -->
+		<!-- Default: 1 -->
+		<activate>1</activate>
+
+		<!-- Peer will listen for and accept sessions -->
+		<!-- Default: 1 -->
+		<listen>1</listen>
+
+		<!-- Peer will attempt to initiate a connection -->
+		<!-- Default: 0 -->
+		<passive>0</passive>
+	</peer>
+</config>
+

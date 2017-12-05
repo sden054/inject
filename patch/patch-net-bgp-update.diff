@@ -1,0 +1,24 @@
+--- Update.pm	2009-04-18 15:46:57.000000000 +0200
++++ Update.pm.new	2009-04-18 15:46:31.000000000 +0200
+@@ -21,6 +21,7 @@
+ use Carp;
+ use IO::Socket;
+ use Net::BGP::Notification qw( :errors );
++use Data::Dumper;
+ 
+ ## General Definitions ##
+ 
+@@ -464,12 +465,7 @@
+     ##
+     for my $attr (@_BGP_MANDATORY_ATTRS)
+     {
+-        $this->{_attr_mask}->[$attr]
+-            or Net::BGP::Notification->throw(
+-                ErrorCode    => BGP_ERROR_CODE_UPDATE_MESSAGE,
+-                ErrorSubCode => BGP_ERROR_SUBCODE_MISSING_WELL_KNOWN_ATTR,
+-                ErrorData    => pack('C', $attr)
+-            );
++	$this->{_attr_mask}->[$attr];
+     }
+ 
+     ## Check for repeated attributes, which violates RFC 4271, sec 5.

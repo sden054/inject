@@ -1,0 +1,54 @@
+--- ShellUI.pm.orig	2009-05-05 11:58:00.000000000 +0200
++++ ShellUI.pm	2009-05-05 12:01:27.000000000 +0200
+@@ -852,29 +852,34 @@
+ 
+ sub process_a_cmd
+ {
+-    my $self = shift;
++    my ($self, $_cmd) = (shift, shift);
+ 
+     $self->{completeline} = "";
+     my $OUT = $self->{'OUT'};
+ 
+ 	my $rawline = "";
+-	for(;;) {
+-		my $prompt = $self->prompt();
+-		$prompt = $prompt->[length $rawline ? 1 : 0] if ref $prompt eq 'ARRAY';
+-		$prompt = $prompt->($self, $rawline) if ref $prompt eq 'CODE';
+-		my $newline = $self->{term}->readline($prompt);
+-
+-		# EOF exits
+-		unless(defined $newline) {
+-			print $OUT "\n";
+-			$self->exit_requested(1);
+-			return undef;
+-		}
+ 
+-		my $continued = ($newline =~ s/\\$//);
+-		$rawline .= (length $rawline ? " " : "") . $newline;
+-		last unless $self->{backslash_continues_command} && $continued;
+-	} 
++    	if($_cmd) {
++		$rawline = $_cmd;
++	} else {
++		for(;;) {
++			my $prompt = $self->prompt();
++			$prompt = $prompt->[length $rawline ? 1 : 0] if ref $prompt eq 'ARRAY';
++			$prompt = $prompt->($self, $rawline) if ref $prompt eq 'CODE';
++			my $newline = $self->{term}->readline($prompt);
++
++			# EOF exits
++			unless(defined $newline) {
++				print $OUT "\n";
++				$self->exit_requested(1);
++				return undef;
++			}
++
++			my $continued = ($newline =~ s/\\$//);
++			$rawline .= (length $rawline ? " " : "") . $newline;
++			last unless $self->{backslash_continues_command} && $continued;
++		} 
++	}
+ 
+     # is it a blank line?
+     if($rawline =~ /^\s*$/) {
