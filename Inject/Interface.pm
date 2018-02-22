@@ -15,6 +15,7 @@ use Inject::Term;
 use Data::Dumper;
 use threads;
 use threads::shared;
+use Network::IPv4Addr qw(ipv4_network);
 
 require Exporter;
 
@@ -779,7 +780,7 @@ sub _cmd_route_set_net {
 		return;
 	}
 
-	$ROUTES_OUT->{$RID}->{_route} = $net;
+	$ROUTES_OUT->{$RID}->{_route} = ipv4_network($net);
 
 	print get_time(), "INFO: Route network attribute for RID $RID set.\n\n";
 }
